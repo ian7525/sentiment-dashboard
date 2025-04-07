@@ -1,0 +1,26 @@
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# dependencies
+node_modules/
+
+# build output
+dist/
+build/
+
+# logs
+logs/
+*.log
+
+# editor settings
+.vscode/
+.idea/
+
+# aws config
+aws-config.json
+
+# other files
+.DS_Store
