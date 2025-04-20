@@ -24,7 +24,6 @@ import {
   formatKeyPhrasesForUI,
   formatEntitiesForUI,
 } from "../utils/responseFormatter";
-import { time } from "console";
 
 export const analyzeText = async (
   req: Request,

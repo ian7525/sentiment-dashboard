@@ -33,7 +33,6 @@ const awsComprehendLanguages = [
 export const detectLanguage = (text: string): LanguageCode => {
   try {
     const detectedLanguage = franc(text);
-    console.log("detectLanguage franc detectedLanguage=", detectedLanguage);
     if (!detectedLanguage || detectedLanguage.length === 0) {
       return "zh-TW";
     }
