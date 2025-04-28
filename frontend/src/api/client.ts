@@ -31,8 +31,8 @@ export const api = {
   },
   getApiStats: async (): Promise<ApiStats> => {
     try {
-      const response = await apiClient.get<ApiStats>("/stats");
-      return response.data;
+      const response = await apiClient.get<any>("/stats");
+      return response.data.data;
     } catch (error) {
       console.error("Error fetching API stats:", error);
       throw error;

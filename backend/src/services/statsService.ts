@@ -3,17 +3,21 @@ import { ApiUsageStats } from "../models/types";
 
 const stats: ApiUsageStats = {
   totalRequests: 0,
-  requestsByLanguage: {},
+  requestsPerDay: [],
   averageTextLength: 0,
-  sentimentDistribution: {
-    POSITIVE: 0,
-    NEGATIVE: 0,
-    NEUTRAL: 0,
-    MIXED: 0,
-  },
+  languageDistribution: [],
+  sentimentDistribution: [],
 };
 
 let totalTextLength: number = 0;
+const languageCounts: Record<string, number> = {};
+const requestByDay: Record<string, number> = {};
+const sentimentCounts: Record<string, number> = {
+  POSITIVE: 0,
+  NEGATIVE: 0,
+  NEUTRAL: 0,
+  MIXED: 0,
+};
 
 export const updateStats = (
   text: string,
@@ -22,17 +26,37 @@ export const updateStats = (
 ) => {
   stats.totalRequests += 1;
 
-  if (!stats.requestsByLanguage[languageCode]) {
-    stats.requestsByLanguage[languageCode] = 0;
+  // language
+  if (!languageCounts[languageCode]) {
+    languageCounts[languageCode] = 0;
   }
-  stats.requestsByLanguage[languageCode] += 1;
+  languageCounts[languageCode] += 1;
+
+  stats.languageDistribution = Object.entries(languageCounts).map(
+    ([language, count]) => ({ language, count })
+  );
 
   totalTextLength += text.length;
   stats.averageTextLength = Math.round(totalTextLength / stats.totalRequests);
 
-  if (stats.sentimentDistribution[sentiment]) {
-    stats.sentimentDistribution[sentiment] += 1;
+  // sentiment
+  if (sentimentCounts[sentiment] !== undefined) {
+    sentimentCounts[sentiment] += 1;
   }
+
+  stats.sentimentDistribution = Object.entries(sentimentCounts).map(
+    ([sentiment, count]) => ({ sentiment, count })
+  );
+
+  const today = new Date().toISOString().split("T")[0];
+  if (!requestByDay[today]) {
+    requestByDay[today] = 0;
+  }
+  requestByDay[today] += 1;
+
+  stats.requestsPerDay = Object.entries(requestByDay)
+    .map(([date, count]) => ({ date, count }))
+    .sort((a, b) => b.date.localeCompare(a.date));
 };
 
 export const getStats = (): ApiUsageStats => ({ ...stats });

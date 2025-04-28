@@ -44,7 +44,8 @@ export interface AnalysisResult {
 
 export interface ApiUsageStats {
   totalRequests: number;
-  requestsByLanguage: Record<string, number>;
+  requestsPerDay: { date: string; count: number }[];
   averageTextLength: number;
-  sentimentDistribution: Record<string, number>;
+  languageDistribution: { language: string; count: number }[];
+  sentimentDistribution: { sentiment: string; count: number }[];
 }
