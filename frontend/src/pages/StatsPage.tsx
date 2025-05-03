@@ -49,27 +49,25 @@ const StatsPage = () => {
   }, []);
 
   return (
-    <Layout>
-      <StatsContainer>
-        <h1>API Usage Statistics</h1>
-        {loading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <div>{error}</div>
-        ) : stats ? (
-          <>
-            <StatsSummary stats={stats} />
-            <ChartsGrid>
-              <UsageChart stats={stats} />
-              <LanguageChart stats={stats} />
-              <SentimentChart stats={stats} />
-            </ChartsGrid>
-          </>
-        ) : (
-          <div>No statistics data available</div>
-        )}
-      </StatsContainer>
-    </Layout>
+    <StatsContainer>
+      <h1>API Usage Statistics</h1>
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <div>{error}</div>
+      ) : stats ? (
+        <>
+          <StatsSummary stats={stats} />
+          <ChartsGrid>
+            <UsageChart stats={stats} />
+            <LanguageChart stats={stats} />
+            <SentimentChart stats={stats} />
+          </ChartsGrid>
+        </>
+      ) : (
+        <div>No statistics data available</div>
+      )}
+    </StatsContainer>
   );
 };
 

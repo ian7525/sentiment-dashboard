@@ -1,11 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import ThemeToggle from "./ThemeToggle";
 
 const Nav = styled.nav`
-  background-color: ${({ theme }) => theme.colors.primary.main};
+  background-color: ${({ theme }) =>
+    theme.mode === "dark"
+      ? theme.colors.primary.dark
+      : theme.colors.primary.main};
   color: white;
   padding: 1rem 2 rem;
   box-shadow: ${({ theme }) => theme.shadows.small};
+  transition: background-color 0.3 ease;
 `;
 
 const NavContainer = styled.div`
@@ -24,6 +29,7 @@ const Logo = styled.div`
 const NavLinks = styled.div`
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 `;
 
 const StyledLink = styled(Link)<{ $active?: boolean }>`
@@ -70,6 +76,7 @@ const Navbar = () => {
             Statistics
           </StyledLink>
         </NavLinks>
+        <ThemeToggle />
       </NavContainer>
     </Nav>
   );
