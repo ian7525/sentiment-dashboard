@@ -76,7 +76,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         </FilterSection>
 
         <FilterSelector
-          label="Language"
+          label={"Language"}
           options={languages}
           selectedValue={filters.language}
           onChange={(value) => onFilterChange("language", value)}
