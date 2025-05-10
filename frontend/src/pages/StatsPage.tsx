@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { api } from "../api/client";
 import { ApiStats } from "../types/api";
 
-import Layout from "../components/common/Layout";
 import StatsSummary from "../components/dashboard/StatsSummary";
 import UsageChart from "../components/dashboard/UsageChart";
 import LanguageChart from "../components/dashboard/LanguageChart";
 import SentimentChart from "../components/dashboard/SentimentChart";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import FilterPanel, { FilterState } from "../components/dashboard/FilterPanel";
 
 const StatsContainer = styled.div`
   display: flex;
@@ -25,10 +25,79 @@ const ChartsGrid = styled.div`
   gap: 1.5rem;
 `;
 
+const ErrorMessage = styled.div`
+  color: #f44336;
+  background-color: #ffebee;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #f44336;
+`;
+
+const DEFAULT_LANGUAGES = [
+  { value: "en", label: "English" },
+  { value: "zh", label: "Chinese" },
+  { value: "ja", label: "Japanese" },
+  { value: "es", label: "Spanish" },
+  { value: "fr", label: "French" },
+];
+
+const DEFAULT_SENTIMENTS = [
+  { value: "POSITIVE", label: "Positive" },
+  { value: "NEGATIVE", label: "Negative" },
+  { value: "NEUTRAL", label: "Neutral" },
+  { value: "MIXED", label: "Mixed" },
+];
+
+const filterData = (
+  data: ApiStats | null,
+  filters: FilterState
+): ApiStats | null => {
+  if (!data) return null;
+
+  const filteredData: ApiStats = JSON.parse(JSON.stringify(data));
+
+  if (filters.dateRange !== "all") {
+    const now = new Date();
+    const daysToFilter =
+      filters.dateRange === "7days"
+        ? 7
+        : filters.dateRange === "30days"
+        ? 30
+        : 90;
+    const cutoffDate = new Date(now.setDate(now.getDate() - daysToFilter));
+
+    filteredData.requestsPerDay = filteredData.requestsPerDay.filter((item) => {
+      const itemDate = new Date(item.date);
+      return itemDate >= cutoffDate;
+    });
+  }
+
+  if (filters.language !== "all") {
+    filteredData.languageDistribution =
+      filteredData.languageDistribution.filter(
+        (item) => item.language === filters.language
+      );
+  }
+
+  if (filters.sentiment !== "all") {
+    filteredData.sentimentDistribution =
+      filteredData.sentimentDistribution.filter(
+        (item) => item.sentiment === filters.sentiment
+      );
+  }
+
+  return filteredData;
+};
+
 const StatsPage = () => {
   const [stats, setStats] = useState<ApiStats | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [filters, setFilters] = useState<FilterState>({
+    dateRange: "30days",
+    language: "all",
+    sentiment: "all",
+  });
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -48,20 +117,48 @@ const StatsPage = () => {
     fetchStats();
   }, []);
 
+  const handleFilterChange = (filterName: keyof FilterState, value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      [filterName]: value,
+    }));
+  };
+
+  const languageOptions = stats?.languageDistribution
+    ? Array.from(
+        new Set(stats.languageDistribution.map((item) => item.language))
+      ).map((lang) => {
+        const defaultLang = DEFAULT_LANGUAGES.find((l) => l.value === lang);
+        return { value: lang, label: defaultLang?.label || lang };
+      })
+    : DEFAULT_LANGUAGES;
+
+  const filteredData = filterData(stats, filters);
+
   return (
     <StatsContainer>
       <h1>API Usage Statistics</h1>
+
+      {!loading && stats && (
+        <FilterPanel
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          languages={languageOptions}
+          sentiments={DEFAULT_SENTIMENTS}
+        />
+      )}
+
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
         <div>{error}</div>
-      ) : stats ? (
+      ) : filteredData ? (
         <>
-          <StatsSummary stats={stats} />
+          <StatsSummary stats={filteredData} />
           <ChartsGrid>
-            <UsageChart stats={stats} />
-            <LanguageChart stats={stats} />
-            <SentimentChart stats={stats} />
+            <UsageChart stats={filteredData} />
+            <LanguageChart stats={filteredData} />
+            <SentimentChart stats={filteredData} />
           </ChartsGrid>
         </>
       ) : (
