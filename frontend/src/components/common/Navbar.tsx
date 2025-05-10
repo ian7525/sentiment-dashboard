@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import ThemeToggle from "./ThemeToggle";
+import LanguageSelector from "./LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 const Nav = styled.nav`
   background-color: ${({ theme }) =>
@@ -55,28 +57,38 @@ const StyledLink = styled(Link)<{ $active?: boolean }>`
   }
 `;
 
+const NavControls = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
 const Navbar = () => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <Nav>
       <NavContainer>
-        <Logo>Sentiment Analysis</Logo>
+        <Logo>{t("app.title")}</Logo>
         <NavLinks>
           <StyledLink to="/" $active={location.pathname === "/"}>
-            Home
+            {t("app.nav.home")}
           </StyledLink>
           <StyledLink
             to="/analysis"
             $active={location.pathname === "/analysis"}
           >
-            Analysis
+            {t("app.nav.analysis")}
           </StyledLink>
           <StyledLink to="/stats" $active={location.pathname === "/stats"}>
-            Statistics
+            {t("app.nav.stats")}
           </StyledLink>
         </NavLinks>
-        <ThemeToggle />
+        <NavControls>
+          <LanguageSelector />
+          <ThemeToggle />
+        </NavControls>
       </NavContainer>
     </Nav>
   );

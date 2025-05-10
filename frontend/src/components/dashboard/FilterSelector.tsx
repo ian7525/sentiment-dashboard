@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 interface FilterOption {
   value: string;
@@ -53,11 +54,13 @@ const FilterSelector: React.FC<FilterSelectorProps> = ({
   selectedValue,
   onChange,
 }: FilterSelectorProps) => {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <Label>{label}</Label>
       <Select value={selectedValue} onChange={(e) => onChange(e.target.value)}>
-        <option value="all">All</option>
+        <option value="all">{t("dashboard.filterSelector.optionAll")}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

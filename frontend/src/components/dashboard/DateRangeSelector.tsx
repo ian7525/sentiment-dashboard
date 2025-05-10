@@ -1,5 +1,5 @@
-import react from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 export type DateRange = "7days" | "30days" | "90days" | "all";
 
@@ -45,28 +45,29 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
   selectedRange,
   onChange,
 }) => {
+  const { t } = useTranslation();
   return (
     <Container>
       <Option
         $active={selectedRange === "7days"}
         onClick={() => onChange("7days")}
       >
-        Last 7 Days
+        {t("dashboard.dateRangeSelector.last7Days")}
       </Option>
       <Option
         $active={selectedRange === "30days"}
         onClick={() => onChange("30days")}
       >
-        Last 30 Days
+        {t("dashboard.dateRangeSelector.last30Days")}
       </Option>
       <Option
         $active={selectedRange === "90days"}
         onClick={() => onChange("90days")}
       >
-        Last 90 Days
+        {t("dashboard.dateRangeSelector.last90Days")}
       </Option>
       <Option $active={selectedRange === "all"} onClick={() => onChange("all")}>
-        All Time
+        {t("dashboard.dateRangeSelector.allTime")}
       </Option>
     </Container>
   );

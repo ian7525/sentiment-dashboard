@@ -8,6 +8,7 @@ import {
   Legend,
 } from "recharts";
 import Card from "../common/Card";
+import { useTranslation } from "react-i18next";
 import { ApiStats } from "../../types/api";
 
 interface LanguageChartProps {
@@ -45,6 +46,7 @@ const COLORS = [
 ];
 
 const LanguageChart = ({ stats }: LanguageChartProps) => {
+  const { t } = useTranslation();
   const formattedData = stats.languageDistribution
     .map((item) => ({
       name: languageNameMap[item.language] || item.language,
@@ -53,7 +55,7 @@ const LanguageChart = ({ stats }: LanguageChartProps) => {
     .sort((a, b) => b.value - a.value);
 
   return (
-    <Card title="Language Distribution">
+    <Card title={t("dashboard.languageChart.title")}>
       <ChartContainer>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>

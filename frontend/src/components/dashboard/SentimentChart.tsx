@@ -11,6 +11,7 @@ import {
   Cell,
 } from "recharts";
 import Card from "../common/Card";
+import { useTranslation } from "react-i18next";
 import { ApiStats } from "../../types/api";
 
 interface SentimentChartProps {
@@ -37,6 +38,7 @@ const sentimentColorMap: Record<string, string> = {
 };
 
 const SentimentChart = ({ stats }: SentimentChartProps) => {
+  const { t } = useTranslation();
   const formattedData = stats.sentimentDistribution
     .map((item) => ({
       name: sentimentNameMap[item.sentiment] || item.sentiment,
@@ -46,7 +48,7 @@ const SentimentChart = ({ stats }: SentimentChartProps) => {
     .sort((a, b) => b.value - a.value);
 
   return (
-    <Card title="Sentiment Distribution">
+    <Card title={t("dashboard.sentimentChart.title")}>
       <ChartContainer>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -58,7 +60,7 @@ const SentimentChart = ({ stats }: SentimentChartProps) => {
             <YAxis />
             <Tooltip formatter={(value) => [`${value} requests`, "Count"]} />
             <Legend />
-            <Bar dataKey="value" name="Count">
+            <Bar dataKey="value" name={t("dashboard.sentimentChart.count")}>
               {formattedData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}

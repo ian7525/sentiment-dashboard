@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/common/Card";
 import Button from "../components/common/Button";
+import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   max-width: 1200px;
@@ -48,48 +49,66 @@ const FeatureItem = styled.li`
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Container>
-      <Title>Sentiment Analysis Dashboard</Title>
-      <Subtitle>
-        Analyze text sentiment, extract key phrases, and identify entities using
-        AI-powered tools.
-      </Subtitle>
+      <Title>{t("home.welcome")}</Title>
+      <Subtitle>{t("home.description")}</Subtitle>
 
       <CardGrid>
-        <Card title="Text Analysis">
+        <Card title={t("home.features.analysis.title")}>
           <FeatureList>
             <FeatureItem>
-              Sentiment classification (positive, negative, neutral, mixed)
+              {t("home.features.analysis.sentimentClassification")}
             </FeatureItem>
-            <FeatureItem>Sentiment score breakdown</FeatureItem>
-            <FeatureItem>Key phrase extraction</FeatureItem>
-            <FeatureItem>Entity recognition</FeatureItem>
+            <FeatureItem>
+              {t("home.features.analysis.sentimentScore")}
+            </FeatureItem>
+            <FeatureItem>{t("home.features.analysis.keyPhrase")}</FeatureItem>
+            <FeatureItem>
+              {t("home.features.analysis.entityRecognition")}
+            </FeatureItem>
           </FeatureList>
-          <Button onClick={() => navigate("/analysis")}>Start Analyzing</Button>
-        </Card>
-
-        <Card title="Multi-language Support">
-          <FeatureList>
-            <FeatureItem>Support for multiple languages</FeatureItem>
-            <FeatureItem>Automatic language detection</FeatureItem>
-            <FeatureItem>Language-specific analysis</FeatureItem>
-          </FeatureList>
-          <Button variant="outlined" onClick={() => navigate("/analysis")}>
-            Learn More
+          <Button onClick={() => navigate("/analysis")}>
+            {t("home.features.analysis.startButton")}
           </Button>
         </Card>
 
-        <Card title="Usage Statistics">
+        <Card title={t("home.features.multiLanguage.title")}>
           <FeatureList>
-            <FeatureItem>Request tracking</FeatureItem>
-            <FeatureItem>Language distribution</FeatureItem>
-            <FeatureItem>Sentiment trends</FeatureItem>
-            <FeatureItem>Visual data representation</FeatureItem>
+            <FeatureItem>
+              {t("home.features.multiLanguage.supportMultiple")}
+            </FeatureItem>
+            <FeatureItem>
+              {t("home.features.multiLanguage.autoDetection")}
+            </FeatureItem>
+            <FeatureItem>
+              {t("home.features.multiLanguage.languageSpecific")}
+            </FeatureItem>
+          </FeatureList>
+          <Button variant="outlined" onClick={() => navigate("/analysis")}>
+            {t("home.features.multiLanguage.learnButton")}
+          </Button>
+        </Card>
+
+        <Card title={t("home.features.statistics.title")}>
+          <FeatureList>
+            <FeatureItem>
+              {t("home.features.statistics.requestTracking")}
+            </FeatureItem>
+            <FeatureItem>
+              {t("home.features.statistics.languageDistribution")}
+            </FeatureItem>
+            <FeatureItem>
+              {t("home.features.statistics.sentimentTrends")}
+            </FeatureItem>
+            <FeatureItem>
+              {t("home.features.statistics.visualData")}
+            </FeatureItem>
           </FeatureList>
           <Button variant="secondary" onClick={() => navigate("/stats")}>
-            View Stats
+            {t("home.features.statistics.viewButton")}
           </Button>
         </Card>
       </CardGrid>

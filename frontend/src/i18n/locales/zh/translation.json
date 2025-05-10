@@ -1,0 +1,197 @@
+{
+  "app": {
+    "title": "情感分析儀表板",
+    "nav": {
+      "home": "首頁",
+      "analysis": "分析",
+      "stats": "統計"
+    }
+  },
+  "home": {
+    "welcome": "歡迎使用情感分析儀表板",
+    "description": "使用人工智慧驅動的工具分析文字情感、取得關鍵句子和識別實體。",
+    "getStarted": "開始使用",
+    "features": {
+      "analysis": {
+        "title": "文字分析",
+        "sentimentClassification": "情感分類（正面、負面、中性、混合）",
+        "sentimentScore": "情感分數明細",
+        "keyPhrase": "關鍵句子提取",
+        "entityRecognition": "實體識別",
+        "startButton": "開始分析"
+      },
+      "multiLanguage": {
+        "title": "多國語言支援",
+        "supportMultiple": "支援多種語言",
+        "autoDetection": "自動語言偵測",
+        "languageSpecific": "針對特定語言的分析",
+        "learnButton": "了解更多"
+      },
+      "statistics": {
+        "title": "使用統計",
+        "requestTracking": "請求追蹤",
+        "languageDistribution": "語言分佈",
+        "sentimentTrends": "情感趨勢",
+        "visualData": "視覺化資料展示",
+        "viewButton": "查看統計"
+      }
+    }
+  },
+  "analysis": {
+    "title": "文字分析",
+    "description": "輸入文字以分析情感、提取關鍵句子並識別實體。分析使用 Amazon Comprehend 的語言處理功能進行。",
+    "inputCard": {
+      "title": "輸入文字"
+    },
+    "errors": {
+      "failedAnalysis": "文字分析失敗。請再試一次。"
+    },
+    "inputForm": {
+      "label": "輸入要分析的文字：",
+      "placeholder": "在此貼上或輸入文字，進行情感分析、關鍵句子提取和實體識別...",
+      "charCount": "{{current}}/{{max}} 字元",
+      "clearButton": "清除",
+      "analyzeButton": "分析文字",
+      "analyzingButton": "分析中...",
+      "selectLanguage": "選擇語言（可選）",
+      "autoDetect": "自動偵測"
+    },
+    "results": {
+      "title": "分析結果",
+      "language": {
+        "title": "語言"
+      },
+      "sentiment": {
+        "title": "情感",
+        "overall": "整體情感",
+        "scores": "情感分數",
+        "distribution": "情感分佈"
+      },
+      "entities": {
+        "title": "實體",
+        "noEntities": "未檢測到實體"
+      },
+      "keyPhrases": {
+        "title": "關鍵句子",
+        "noKeyPhrases": "未偵測到關鍵句子"
+      },
+      "originalText": "原始文字",
+      "analyzedAt": "分析時間",
+      "requestId": "請求ID"
+    },
+    "example": {
+      "title": "或者使用這些範例："
+    }
+  },
+  "stats": {
+    "title": "API 使用統計",
+    "noData": "無統計數據可用",
+    "summary": {
+      "totalRequests": "總請求數",
+      "avgTextLength": "平均文字長度",
+      "topLanguage": "最常用語言",
+      "topSentiment": "最常見情感"
+    },
+    "charts": {
+      "usage": {
+        "title": "使用趨勢",
+        "xAxis": "日期",
+        "yAxis": "請求數量"
+      },
+      "language": {
+        "title": "語言分佈",
+        "noData": "無語言數據可用"
+      },
+      "sentiment": {
+        "title": "情感分佈",
+        "noData": "無情感數據可用"
+      }
+    },
+    "filters": {
+      "title": "過濾器",
+      "dateRange": "日期範圍",
+      "language": "語言",
+      "sentiment": "情感",
+      "apply": "應用",
+      "reset": "重置",
+      "from": "從",
+      "to": "到",
+      "all": "全部"
+    }
+  },
+  "sentiments": {
+    "positive": "正面",
+    "negative": "負面",
+    "neutral": "中性",
+    "mixed": "混合"
+  },
+  "common": {
+    "loading": "處理中，請稍後...",
+    "error": "發生錯誤：{{error}}",
+    "retry": "重試",
+    "noData": "無可用數據",
+    "copy": "複製",
+    "copied": "已複製！",
+    "language": "語言"
+  },
+  "entityTypes": {
+    "person": "人物",
+    "location": "地點",
+    "organization": "組織",
+    "commercial_item": "產品",
+    "date": "日期",
+    "quantity": "數量",
+    "event": "事件",
+    "title": "標題",
+    "other": "其他"
+  },
+  "languages": {
+    "en": "英文",
+    "zhTW": "繁體中文",
+    "zh": "中文",
+    "fr": "法文",
+    "de": "德文",
+    "es": "西班牙文",
+    "it": "義大利文",
+    "ja": "日文",
+    "ko": "韓文",
+    "pt": "葡萄牙文",
+    "ru": "俄文"
+  },
+  "dashboard": {
+    "dateRangeSelector": {
+      "last7Days": "過去7天",
+      "last30Days": "過去30天",
+      "last90Days": "過去90天",
+      "allTime": "所有時間"
+    },
+    "filterPanel": {
+      "title": "過濾統計",
+      "sectionLabel": "時間範圍",
+      "languageSelector": "語言",
+      "sentimentSelector": "情感"
+    },
+    "filterSelector": {
+      "optionAll": "全部"
+    },
+    "apiUsage": {
+      "title": "API使用統計",
+      "requests": "請求次數"
+    },
+    "languageChart": {
+      "title": "語言分佈"
+    },
+    "sentimentChart": {
+      "title": "情感分佈",
+      "count": "次數"
+    },
+    "statsSummary": {
+      "title": "統計摘要",
+      "totalRequests": "總請求數",
+      "last7Days": "過去7天",
+      "avgTextLength": "平均文字長度",
+      "topLanguage": "最常用語言",
+      "topSentiment": "最常見情感"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { useTranslation } from "react-i18next";
 
 interface LoadingSpinnerProps {
   size?: "small" | "medium" | "large";
@@ -75,10 +76,11 @@ const LoadingSpinner = ({
 };
 
 export const LoadingOverlay = () => {
+  const { t } = useTranslation();
   return (
     <LoadingContainer>
       <LoadingSpinner />
-      <LoadingText>Processing, please wait...</LoadingText>
+      <LoadingText>{t("stats.title")}</LoadingText>
     </LoadingContainer>
   );
 };

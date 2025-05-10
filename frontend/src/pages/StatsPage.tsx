@@ -11,6 +11,7 @@ import LanguageChart from "../components/dashboard/LanguageChart";
 import SentimentChart from "../components/dashboard/SentimentChart";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import FilterPanel, { FilterState } from "../components/dashboard/FilterPanel";
+import { useTranslation } from "react-i18next";
 
 const StatsContainer = styled.div`
   display: flex;
@@ -23,14 +24,6 @@ const ChartsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 1.5rem;
-`;
-
-const ErrorMessage = styled.div`
-  color: #f44336;
-  background-color: #ffebee;
-  padding: 1rem;
-  border-radius: 4px;
-  border: 1px solid #f44336;
 `;
 
 const DEFAULT_LANGUAGES = [
@@ -98,6 +91,7 @@ const StatsPage = () => {
     language: "all",
     sentiment: "all",
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -137,7 +131,7 @@ const StatsPage = () => {
 
   return (
     <StatsContainer>
-      <h1>API Usage Statistics</h1>
+      <h1>{t("stats.title")}</h1>
 
       {!loading && stats && (
         <FilterPanel
@@ -151,7 +145,7 @@ const StatsPage = () => {
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
-        <div>{error}</div>
+        <div>{t("common.error", { error })}</div>
       ) : filteredData ? (
         <>
           <StatsSummary stats={filteredData} />
@@ -162,7 +156,7 @@ const StatsPage = () => {
           </ChartsGrid>
         </>
       ) : (
-        <div>No statistics data available</div>
+        <div>{t("stats.noData")}</div>
       )}
     </StatsContainer>
   );

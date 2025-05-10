@@ -2,6 +2,7 @@ import { useState, FormEvent, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import ExampleTextSelector from "./ExampleTextSelector";
+import { useTranslation } from "react-i18next";
 
 interface TextInputFormProps {
   onSubmit: (text: string, language?: string) => void;
@@ -57,8 +58,9 @@ const MAX_CHARS = 5000;
 
 const TextInputForm = ({ onSubmit, isLoading }: TextInputFormProps) => {
   const [text, setText] = useState("");
-  const [language, setLanguate] = useState<string | undefined>(undefined);
+  const [language, setLanguage] = useState<string | undefined>(undefined);
   const [submitEnabled, setSubmitEnabled] = useState(false);
+  const { t } = useTranslation();
 
   const isAtLimit = text.length >= MAX_CHARS;
 
@@ -82,15 +84,18 @@ const TextInputForm = ({ onSubmit, isLoading }: TextInputFormProps) => {
       <ExampleTextSelector onSelectExample={handleExampleSelect} />
 
       <TextAreaWrapper>
-        <Label htmlFor="analysis-text">Enter text to analyze:</Label>
+        <Label htmlFor="analysis-text">{t("analysis.inputForm.label")}</Label>
         <TextArea
-          is="analysis-text"
+          id="analysis-text"
           value={text}
           onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
-          placeholder="Paste or type text here for sentiment analysis, key phrase extraction, and entity recognition..."
+          placeholder={t("analysis.inputForm.placeholder")}
         />
         <CharCount $isLimit={isAtLimit}>
-          {text.length}/{MAX_CHARS} characters
+          {t("analysis.inputForm.charCount", {
+            current: text.length,
+            max: MAX_CHARS,
+          })}
         </CharCount>
       </TextAreaWrapper>
 
@@ -101,10 +106,12 @@ const TextInputForm = ({ onSubmit, isLoading }: TextInputFormProps) => {
           onClick={() => setText("")}
           disabled={!text || isLoading}
         >
-          Clear
+          {t("analysis.inputForm.clearButton")}
         </Button>
         <Button type="submit" disabled={!text.trim() || isAtLimit || isLoading}>
-          {isLoading ? "Analyzing..." : "Analyze Text"}
+          {isLoading
+            ? t("analysis.inputForm.analyzingButton")
+            : t("analysis.inputForm.analyzeButton")}
         </Button>
       </Controls>
     </Form>

@@ -8,6 +8,7 @@ import { AnalysisResult as AnalysisResultType } from "../types/api";
 import { LoadingOverlay } from "../components/common/LoadingSpinner";
 import { media } from "../styles/media";
 import Container from "../components/common/Container";
+import { useTranslation } from "react-i18next";
 
 const PageContainer = styled(Container)`
   max-width: 1200px;
@@ -87,6 +88,7 @@ const AnalysisPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<AnalysisResultType | null>(null);
+  const { t } = useTranslation();
 
   const handleAnalyzeText = async (text: string, language?: string) => {
     setIsLoading(true);
@@ -94,7 +96,7 @@ const AnalysisPage = () => {
 
     try {
       const analysisResult = await api.analyzeText({ text, language });
-      -setResult(analysisResult);
+      setResult(analysisResult);
     } catch (error) {
       console.error("Error analyzing text:", error);
       setError("Failed to analyze text. Please try again.");
@@ -105,17 +107,13 @@ const AnalysisPage = () => {
 
   return (
     <PageContainer>
-      <Title>Text Analysis</Title>
-      <Description>
-        Enter text to analyze sentiment, extract key phrases, and identify
-        entities. The analysis is performed using Amazon Comprehend's language
-        processing capabilities.
-      </Description>
+      <Title>{t("analysis.title")}</Title>
+      <Description>{t("analysis.description")}</Description>
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <ContentLayout>
         <InputSection>
-          <Card title="Enter Text">
+          <Card title={t("analysis.inputCard.title")}>
             <TextAreaContainer>
               <TextInputForm
                 onSubmit={handleAnalyzeText}

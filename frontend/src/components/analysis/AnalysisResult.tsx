@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AnalysisResult as AnalysisResultType } from "../../types/api";
 import Card from "../common/Card";
+import { useTranslation } from "react-i18next";
 
 interface AnalysisResultProps {
   result: AnalysisResultType;
@@ -133,6 +134,7 @@ const AnalysisResult = ({ result }: AnalysisResultProps) => {
     timestamp,
     requestId,
   } = result.data || {};
+  const { t } = useTranslation();
 
   const languageCode = sentimentAnalysis?.languageCode;
   const languageName =
@@ -144,18 +146,18 @@ const AnalysisResult = ({ result }: AnalysisResultProps) => {
 
   return (
     <div>
-      <Card title="Analysis Result">
+      <Card title={t("analysis.results.title")}>
         <InfoItem>
-          <Label>Language:</Label>
+          <Label>{t("analysis.results.language.title")}:</Label>
           <Value>
             {languageName} ({languageCode})
           </Value>
         </InfoItem>
 
         <InfoItem>
-          <Label>Overall Sentiment:</Label>
+          <Label>{t("analysis.results.sentiment.overall")}:</Label>
           <SentimentScore $sentiment={sentimentAnalysis.sentiment}>
-            {sentimentAnalysis.sentimentLabel}
+            {t(`sentiments.${sentimentAnalysis.sentimentLabel.toLowerCase()}`)}
           </SentimentScore>
         </InfoItem>
 
@@ -170,21 +172,26 @@ const AnalysisResult = ({ result }: AnalysisResultProps) => {
         </SentimentBar>
 
         <InfoItem>
-          <Label>Analyzed at:</Label>
+          <Label>{t("analysis.results.analyzedAt")}:</Label>
           <Value>{new Date(timestamp).toLocaleString()}</Value>
         </InfoItem>
 
         <ResultContainer>
-          <Card title="Sentiment Scores">
+          <Card title={t("analysis.results.sentiment.scores")}>
             {sentimentAnalysis.scores.map((score, index) => (
               <InfoItem key={index}>
-                <Label>{score.name}:</Label>
+                <Label>{t(`sentiments.${score.name.toLowerCase()}`)}:</Label>
                 <Value>{(score.value * 100).toFixed(2)}%</Value>
               </InfoItem>
             ))}
           </Card>
 
-          <Card title={`Key Phrases (${keyPhrases.phrases.length})`}>
+          <Card
+            title={
+              t("analysis.results.keyPhrases.title") +
+              ` (${keyPhrases.phrases.length})`
+            }
+          >
             {keyPhrases.phrases.length > 0 ? (
               <KeyPhraseList>
                 {keyPhrases.phrases.map((phrase, index) => (
@@ -192,34 +199,42 @@ const AnalysisResult = ({ result }: AnalysisResultProps) => {
                 ))}
               </KeyPhraseList>
             ) : (
-              <Value>No key phrases detected</Value>
+              <Value>{t("analysis.results.keyPhrases.noKeyPhrases")}</Value>
             )}
           </Card>
 
-          <Card title={`Entities (${entities.entities.length})`}>
+          <Card
+            title={
+              t("analysis.results.entities.title") +
+              ` (${entities.entities.length})`
+            }
+          >
             {entities.entities.length > 0 ? (
               <EntityList>
                 {entities.entities.map((entity, index) => (
                   <Entity key={index}>
                     <EntityType $type={entity.type}>
-                      {entity.typeLabel || entity.type}
+                      {t(
+                        `entityTypes.${entity.type.toLowerCase()}`,
+                        entity.typeLabel || entity.type
+                      )}
                     </EntityType>
                     <EntityText>{entity.text}</EntityText>
                   </Entity>
                 ))}
               </EntityList>
             ) : (
-              <Value>No entities detected</Value>
+              <Value>{t("analysis.results.entities.noEntities")}</Value>
             )}
           </Card>
         </ResultContainer>
 
-        <Card title="Original Text">
+        <Card title={t("analysis.results.originalText")}>
           <OriginalText>{originalText}</OriginalText>
         </Card>
 
         <InfoItem>
-          <Label>Request ID:</Label>
+          <Label>{t("analysis.results.requestId")}:</Label>
           <Value>{requestId}</Value>
         </InfoItem>
       </Card>

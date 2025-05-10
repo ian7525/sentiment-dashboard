@@ -10,6 +10,7 @@ import {
   Legend,
 } from "recharts";
 import Card from "../common/Card";
+import { useTranslation } from "react-i18next";
 import { ApiStats } from "../../types/api";
 
 interface UsageChartProps {
@@ -22,13 +23,14 @@ const ChartContainer = styled.div`
 `;
 
 const UsageChart = ({ stats }: UsageChartProps) => {
+  const { t } = useTranslation();
   const formattedData = stats.requestsPerDay.map((day) => ({
     date: new Date(day.date).toLocaleDateString(),
     requests: day.count,
   }));
 
   return (
-    <Card title="API Usage Trends">
+    <Card title={t("dashboard.languageChart.title")}>
       <ChartContainer>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -43,7 +45,7 @@ const UsageChart = ({ stats }: UsageChartProps) => {
             <Line
               type="monotone"
               dataKey="requests"
-              name="Requests"
+              name={t("dashboard.apiUsage.requests")}
               stroke="#8884d8"
               activeDot={{ r: 8 }}
             />

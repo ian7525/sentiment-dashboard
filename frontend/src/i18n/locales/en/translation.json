@@ -1,0 +1,197 @@
+{
+  "app": {
+    "title": "Sentiment Analysis Dashboard",
+    "nav": {
+      "home": "Home",
+      "analysis": "Text Analysis",
+      "stats": "Statistics"
+    }
+  },
+  "home": {
+    "welcome": "Welcome to Sentiment Analysis Dashboard",
+    "description": "Analyze text sentiment, extract key phrases, and identify entities using AI-powered tools.",
+    "getStarted": "Get Started",
+    "features": {
+      "analysis": {
+        "title": "Text Analysis",
+        "sentimentClassification": "Sentiment classification (positive, negative, neutral, mixed)",
+        "sentimentScore": "Sentiment score breakdown",
+        "keyPhrase": "Key phrase extraction",
+        "entityRecognition": "Entity recognition",
+        "startButton": "Start Analyzing"
+      },
+      "multiLanguage": {
+        "title": "Multi-language Support",
+        "supportMultiple": "Support for multiple languages",
+        "autoDetection": "Automatic language detection",
+        "languageSpecific": "Language-specific analysis",
+        "learnButton": "Learn More"
+      },
+      "statistics": {
+        "title": "Usage Statistics",
+        "requestTracking": "Request tracking",
+        "languageDistribution": "Language distribution",
+        "sentimentTrends": "Sentiment trends",
+        "visualData": "Visual data representation",
+        "viewButton": "View Stats"
+      }
+    }
+  },
+  "analysis": {
+    "title": "Text Analysis",
+    "description": "Enter text to analyze sentiment, extract key phrases, and identify entities. The analysis is performed using Amazon Comprehend's language processing capabilities.",
+    "inputCard": {
+      "title": "Enter Text"
+    },
+    "errors": {
+      "failedAnalysis": "Failed to analyze text. Please try again."
+    },
+    "inputForm": {
+      "label": "Enter text to analyze:",
+      "placeholder": "Paste or type text here for sentiment analysis, key phrase extraction, and entity recognition...",
+      "charCount": "{{current}}/{{max}} characters",
+      "clearButton": "Clear",
+      "analyzeButton": "Analyze Text",
+      "analyzingButton": "Analyzing...",
+      "selectLanguage": "Select language (optional)",
+      "autoDetect": "Auto-detect"
+    },
+    "results": {
+      "title": "Analysis Result",
+      "language": {
+        "title": "Language"
+      },
+      "sentiment": {
+        "title": "Sentiment",
+        "overall": "Overall Sentiment",
+        "scores": "Sentiment Scores",
+        "distribution": "Sentiment Distribution"
+      },
+      "entities": {
+        "title": "Entities",
+        "noEntities": "No entities detected"
+      },
+      "keyPhrases": {
+        "title": "Key Phrases",
+        "noKeyPhrases": "No key phrases detected"
+      },
+      "originalText": "Original Text",
+      "analyzedAt": "Analyzed at",
+      "requestId": "Request ID"
+    },
+    "example": {
+      "title": "Or try one of these examples:"
+    }
+  },
+  "stats": {
+    "title": "API Usage Statistics",
+    "noData": "No statistics data available",
+    "summary": {
+      "totalRequests": "Total Requests",
+      "avgTextLength": "Average Text Length",
+      "topLanguage": "Top Language",
+      "topSentiment": "Top Sentiment"
+    },
+    "charts": {
+      "usage": {
+        "title": "Usage Over Time",
+        "xAxis": "Date",
+        "yAxis": "Number of Requests"
+      },
+      "language": {
+        "title": "Language Distribution",
+        "noData": "No language data available"
+      },
+      "sentiment": {
+        "title": "Sentiment Distribution",
+        "noData": "No sentiment data available"
+      }
+    },
+    "filters": {
+      "title": "Filters",
+      "dateRange": "Date Range",
+      "language": "Language",
+      "sentiment": "Sentiment",
+      "apply": "Apply",
+      "reset": "Reset",
+      "from": "From",
+      "to": "To",
+      "all": "All"
+    }
+  },
+  "sentiments": {
+    "positive": "Positive",
+    "negative": "Negative",
+    "neutral": "Neutral",
+    "mixed": "Mixed"
+  },
+  "common": {
+    "loading": "Processing, please wait...",
+    "error": "An error occurred: {{error}}",
+    "retry": "Retry",
+    "noData": "No data available",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "language": "Language"
+  },
+  "entityTypes": {
+    "person": "Person",
+    "location": "Location",
+    "organization": "Organization",
+    "commercial_item": "Product",
+    "date": "Date",
+    "quantity": "Quantity",
+    "event": "Event",
+    "title": "Title",
+    "other": "Other"
+  },
+  "languages": {
+    "en": "English",
+    "zhTW": "繁體中文",
+    "zh": "中文",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish",
+    "it": "Italian",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "pt": "Portuguese",
+    "ru": "Russian"
+  },
+  "dashboard": {
+    "dateRangeSelector": {
+      "last7Days": "Last 7 Days",
+      "last30Days": "Last 30 Days",
+      "last90Days": "Last 90 Days",
+      "allTime": "All Time"
+    },
+    "filterPanel": {
+      "title": "Filter Statistics",
+      "sectionLabel": "Time Range",
+      "languageSelector": "Language",
+      "sentimentSelector": "Sentiment"
+    },
+    "filterSelector": {
+      "optionAll": "all"
+    },
+    "apiUsage": {
+      "title": "API Usage Trends",
+      "requests": "Requests"
+    },
+    "languageChart": {
+      "title": "Language Distribution"
+    },
+    "sentimentChart": {
+      "title": "Sentiment Distribution",
+      "count": "Count"
+    },
+    "statsSummary": {
+      "title": "Statistics Summary",
+      "totalRequests": "Total Requests",
+      "last7Days": "Last 7 Days",
+      "avgTextLength": "Average Text Length",
+      "topLanguage": "Top Language",
+      "topSentiment": "Top Sentiment"
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DateRangeSelector, { DateRange } from "./DateRangeSelector";
 import FilterSelector from "./FilterSelector";
+import { useTranslation } from "react-i18next";
 
 export interface FilterState {
   dateRange: DateRange;
@@ -59,16 +60,18 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   languages,
   sentiments,
 }) => {
+  const { t } = useTranslation();
+
   const handleDateRangeChange = (range: DateRange) => {
     onFilterChange("dateRange", range);
   };
 
   return (
     <Container>
-      <Title>Filter Statistics</Title>
+      <Title>{t("dashboard.filterPanel.title")}</Title>
       <FilterControls>
         <FilterSection>
-          <SectionLabel>Time Range</SectionLabel>
+          <SectionLabel>{t("dashboard.filterPanel.sectionLabel")}</SectionLabel>
           <DateRangeSelector
             selectedRange={filters.dateRange}
             onChange={handleDateRangeChange}
@@ -76,14 +79,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         </FilterSection>
 
         <FilterSelector
-          label={"Language"}
+          label={t("dashboard.filterPanel.languageSelector")}
           options={languages}
           selectedValue={filters.language}
           onChange={(value) => onFilterChange("language", value)}
         ></FilterSelector>
 
         <FilterSelector
-          label="Sentiment"
+          label={t("dashboard.filterPanel.sentimentSelector")}
           options={sentiments}
           selectedValue={filters.sentiment}
           onChange={(value) => onFilterChange("sentiment", value)}

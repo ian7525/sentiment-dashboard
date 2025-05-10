@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Card from "../common/Card";
+
+import { useTranslation } from "react-i18next";
 import { ApiStats } from "../../types/api";
 
 interface StatsSummaryProps {
@@ -34,7 +36,7 @@ const StatLabel = styled.div`
 `;
 
 const StatsSummary = ({ stats }: StatsSummaryProps) => {
-  console.log("stats=", stats);
+  const { t } = useTranslation();
   const last7DayRequests = stats.requestsPerDay
     .slice(-7)
     .reduce((sum, day) => sum + day.count, 0);
@@ -51,31 +53,31 @@ const StatsSummary = ({ stats }: StatsSummaryProps) => {
       : "N/A";
 
   return (
-    <Card title="Statistics Summary">
+    <Card title={t("dashboard.statsSummary.title")}>
       <StatsGrid>
         <StatItem>
           <StatValue>{stats.totalRequests}</StatValue>
-          <StatLabel>Total Requests</StatLabel>
+          <StatLabel>{t("dashboard.statsSummary.totalRequests")}</StatLabel>
         </StatItem>
 
         <StatItem>
           <StatValue>{last7DayRequests}</StatValue>
-          <StatLabel>Last 7 Days</StatLabel>
+          <StatLabel>{t("dashboard.statsSummary.last7Days")}</StatLabel>
         </StatItem>
 
         <StatItem>
           <StatValue>{stats.averageTextLength.toFixed(0)}</StatValue>
-          <StatLabel>Avg Text Length</StatLabel>
+          <StatLabel>{t("dashboard.statsSummary.avgTextLength")}</StatLabel>
         </StatItem>
 
         <StatItem>
           <StatValue>{topLanguage}</StatValue>
-          <StatLabel>Top Language</StatLabel>
+          <StatLabel>{t("dashboard.statsSummary.topLanguage")}</StatLabel>
         </StatItem>
 
         <StatItem>
           <StatValue>{topSentiment}</StatValue>
-          <StatLabel>Top Sentiment</StatLabel>
+          <StatLabel>{t("dashboard.statsSummary.topSentiment")}</StatLabel>
         </StatItem>
       </StatsGrid>
     </Card>

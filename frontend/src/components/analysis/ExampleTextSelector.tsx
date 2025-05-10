@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../common/Button";
+import { useTranslation } from "react-i18next";
 
 interface ExampleTextSelectorProps {
   onSelectExample: (text: string) => void;
@@ -45,9 +46,10 @@ const examples = [
 ];
 
 const ExampleTextSelector = ({ onSelectExample }: ExampleTextSelectorProps) => {
+  const { t } = useTranslation();
   return (
     <Container>
-      <Label>Or try one of these examples:</Label>
+      <Label>{t("analysis.example.title")}</Label>
       <ButtonGroup>
         {examples.map((example, index) => (
           <Button
