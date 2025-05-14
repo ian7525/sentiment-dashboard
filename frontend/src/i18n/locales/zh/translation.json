@@ -77,7 +77,9 @@
       },
       "originalText": "原始文字",
       "analyzedAt": "分析時間",
-      "requestId": "請求ID"
+      "requestId": "請求ID",
+      "copyAll": "複製 JSON",
+      "copyText": "複製文字"
     },
     "example": {
       "title": "或者使用這些範例："

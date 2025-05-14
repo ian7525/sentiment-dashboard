@@ -77,7 +77,9 @@
       },
       "originalText": "Original Text",
       "analyzedAt": "Analyzed at",
-      "requestId": "Request ID"
+      "requestId": "Request ID",
+      "copyAll": "Copy JSON",
+      "copyText": "Copy Text"
     },
     "example": {
       "title": "Or try one of these examples:"

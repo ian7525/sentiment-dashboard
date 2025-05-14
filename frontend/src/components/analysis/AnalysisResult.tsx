@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AnalysisResult as AnalysisResultType } from "../../types/api";
 import Card from "../common/Card";
 import { useTranslation } from "react-i18next";
+import CopyButton from "../common/CopyButton";
 
 interface AnalysisResultProps {
   result: AnalysisResultType;
@@ -152,6 +153,10 @@ const AnalysisResult = ({ result }: AnalysisResultProps) => {
           <Value>
             {languageName} ({languageCode})
           </Value>
+          <CopyButton
+            text={JSON.stringify(result.data, null, 2)}
+            label={t("analysis.results.copyAll")}
+          />
         </InfoItem>
 
         <InfoItem>
@@ -230,6 +235,10 @@ const AnalysisResult = ({ result }: AnalysisResultProps) => {
         </ResultContainer>
 
         <Card title={t("analysis.results.originalText")}>
+          <CopyButton
+            text={originalText}
+            label={t("analysis.results.copyText")}
+          />
           <OriginalText>{originalText}</OriginalText>
         </Card>
 
