@@ -2,6 +2,8 @@ import { useState, FormEvent, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import ExampleTextSelector from "./ExampleTextSelector";
+import TextLanguageSelector from "./TextLanguageSelector";
+import EnhancedTextArea from "../common/EnhancedTextArea";
 import { useTranslation } from "react-i18next";
 
 interface TextInputFormProps {
@@ -26,18 +28,15 @@ const Label = styled.label`
   color: ${({ theme }) => theme.colors.text.primary};
 `;
 
-const TextArea = styled.textarea`
-  padding: 0.75rem;
-  border: 1px solid ${({ theme }) => theme.colors.secondary.light};
-  border-radius: ${({ theme }) => theme.borderRadius.small};
-  min-height: 150px;
-  font-family: inherit;
-  resize: vertical;
+const ControlsRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.primary.main};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary.light}40;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
   }
 `;
 
@@ -83,37 +82,44 @@ const TextInputForm = ({ onSubmit, isLoading }: TextInputFormProps) => {
     <Form onSubmit={handleSubmit}>
       <ExampleTextSelector onSelectExample={handleExampleSelect} />
 
-      <TextAreaWrapper>
-        <Label htmlFor="analysis-text">{t("analysis.inputForm.label")}</Label>
-        <TextArea
-          id="analysis-text"
-          value={text}
-          onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
-          placeholder={t("analysis.inputForm.placeholder")}
-        />
-        <CharCount $isLimit={isAtLimit}>
-          {t("analysis.inputForm.charCount", {
-            current: text.length,
-            max: MAX_CHARS,
-          })}
-        </CharCount>
-      </TextAreaWrapper>
+      <EnhancedTextArea
+        id="analysis-text"
+        value={text}
+        onChange={setText}
+        placeholder={t("analysis.inputForm.placeholder")}
+        maxLength={MAX_CHARS}
+        minRows={6}
+        maxRows={15}
+        disabled={isLoading}
+        label={t("analysis.inputForm.label")}
+      />
 
-      <Controls>
-        <Button
-          variant="outlined"
-          type="button"
-          onClick={() => setText("")}
-          disabled={!text || isLoading}
-        >
-          {t("analysis.inputForm.clearButton")}
-        </Button>
-        <Button type="submit" disabled={!text.trim() || isAtLimit || isLoading}>
-          {isLoading
-            ? t("analysis.inputForm.analyzingButton")
-            : t("analysis.inputForm.analyzeButton")}
-        </Button>
-      </Controls>
+      <ControlsRow>
+        <TextLanguageSelector
+          value={language || ""}
+          onChange={(e) => setLanguage(e.target.value || undefined)}
+          disabled={isLoading}
+        />
+
+        <Controls>
+          <Button
+            variant="outlined"
+            type="button"
+            onClick={() => setText("")}
+            disabled={!text || isLoading}
+          >
+            {t("analysis.inputForm.clearButton")}
+          </Button>
+          <Button
+            type="submit"
+            disabled={!text.trim() || isAtLimit || isLoading}
+          >
+            {isLoading
+              ? t("analysis.inputForm.analyzingButton")
+              : t("analysis.inputForm.analyzeButton")}
+          </Button>
+        </Controls>
+      </ControlsRow>
     </Form>
   );
 };
