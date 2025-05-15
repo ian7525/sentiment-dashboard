@@ -11,7 +11,7 @@ const SelectContainer = styled.div`
 
 const Label = styled.label`
   margin-right: ${({ theme }) => theme.spacing(1)};
-  color: ${({ theme }) => theme.colors.text.primary};
+  color: white;
   font-size: ${({ theme }) => theme.typography.fontSize.small};
 `;
 

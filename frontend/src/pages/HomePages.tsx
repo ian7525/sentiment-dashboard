@@ -75,23 +75,6 @@ const HomePage = () => {
           </Button>
         </Card>
 
-        <Card title={t("home.features.multiLanguage.title")}>
-          <FeatureList>
-            <FeatureItem>
-              {t("home.features.multiLanguage.supportMultiple")}
-            </FeatureItem>
-            <FeatureItem>
-              {t("home.features.multiLanguage.autoDetection")}
-            </FeatureItem>
-            <FeatureItem>
-              {t("home.features.multiLanguage.languageSpecific")}
-            </FeatureItem>
-          </FeatureList>
-          <Button variant="outlined" onClick={() => navigate("/analysis")}>
-            {t("home.features.multiLanguage.learnButton")}
-          </Button>
-        </Card>
-
         <Card title={t("home.features.statistics.title")}>
           <FeatureList>
             <FeatureItem>

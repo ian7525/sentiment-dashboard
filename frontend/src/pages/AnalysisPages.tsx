@@ -9,6 +9,12 @@ import { LoadingOverlay } from "../components/common/LoadingSpinner";
 import { media } from "../styles/media";
 import Container from "../components/common/Container";
 import { useTranslation } from "react-i18next";
+import {
+  positiveResult,
+  negativeResult,
+  neutralResult,
+  mixedResult,
+} from "../mockData/analysisResults";
 
 const PageContainer = styled(Container)`
   max-width: 1200px;
@@ -84,6 +90,25 @@ const TextAreaContainer = styled.div`
   }
 `;
 
+const emulateAnalyzeText = (type: string) =>
+  new Promise<AnalysisResultType>((resolve) => {
+    const analysisResults: any = {
+      positive: positiveResult,
+      negative: negativeResult,
+      neutral: neutralResult,
+      mixed: mixedResult,
+    };
+
+    setTimeout(() => {
+      console.log("timeout analysisResults[type]=", analysisResults[type]);
+      resolve({
+        success: true,
+        data: analysisResults[type],
+        requestId: analysisResults[type].requestId,
+      });
+    }, 1000);
+  });
+
 const AnalysisPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -95,7 +120,7 @@ const AnalysisPage = () => {
     setError(null);
 
     try {
-      const analysisResult = await api.analyzeText({ text, language });
+      const analysisResult: AnalysisResultType = await emulateAnalyzeText(text);
       setResult(analysisResult);
     } catch (error) {
       console.error("Error analyzing text:", error);
