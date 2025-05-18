@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Card from "../components/common/Card";
 import TextInputForm from "../components/analysis/TextInputForm";
 import AnalysisResult from "../components/analysis/AnalysisResult";
-import { api } from "../api/client";
 import { AnalysisResult as AnalysisResultType } from "../types/api";
 import { LoadingOverlay } from "../components/common/LoadingSpinner";
 import { media } from "../styles/media";
@@ -115,7 +114,7 @@ const AnalysisPage = () => {
   const [result, setResult] = useState<AnalysisResultType | null>(null);
   const { t } = useTranslation();
 
-  const handleAnalyzeText = async (text: string, language?: string) => {
+  const handleAnalyzeText = async (text: string) => {
     setIsLoading(true);
     setError(null);
 

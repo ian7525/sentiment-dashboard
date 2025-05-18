@@ -6,7 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import styled, { keyframes, css } from "styled-components";
-import { useTranslation } from "react-i18next";
 
 type ToastType = "success" | "error" | "info" | "warning";
 
@@ -119,7 +118,6 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [toasts, setToasts] = useState<(Toast & { removing?: boolean })[]>([]);
-  const { t } = useTranslation();
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) =>
@@ -175,7 +173,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useToast = () => {
   const context = useContext(ToastContext);
   if (context === undefined) {
-    throw new Error("useTOast must be used within a ToastProvider");
+    throw new Error("useToast must be used within a ToastProvider");
   }
   return context;
 };

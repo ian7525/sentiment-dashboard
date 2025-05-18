@@ -72,7 +72,7 @@ const LanguageChart = ({ stats }: LanguageChartProps) => {
                 `${name}: ${(percent * 100).toFixed(0)}%`
               }
             >
-              {formattedData.map((entry, index) => (
+              {formattedData.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
