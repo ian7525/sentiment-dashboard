@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/common/Layout";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LocaleProvider } from "./contexts/LocaleContext";
@@ -17,7 +17,7 @@ function App() {
       <LocaleProvider>
         <ToastProvider>
           <GlobalStyles />
-          <BrowserRouter>
+          <HashRouter>
             <Layout>
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/*" element={<div>Page not found</div>} />
               </Routes>
             </Layout>
-          </BrowserRouter>
+          </HashRouter>
         </ToastProvider>
       </LocaleProvider>
     </ThemeProvider>

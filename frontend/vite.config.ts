@@ -3,11 +3,9 @@ import react from "@vitejs/plugin-react";
 import compression from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
 
-const repositoryName = "sentiment-analysis-dashboard";
-
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === "production" ? `/${repositoryName}/` : "/",
+  base: "/sentiment-dashboard/",
   plugins: [
     react(),
     compression({
