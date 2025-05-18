@@ -1,4 +1,4 @@
-import{j as e}from"./index-Vsd6LYTa.js";import{d as t}from"./styled-COyek2TH.js";import{C as s}from"./Card-DQj5eJ8z.js";import{B as i}from"./Button-DhR5qo6f.js";import{f as r}from"./react-vendor-DgofhK1e.js";import{u as a}from"./i18n-vendor-CClJGxDl.js";const o=t.div`
+import{j as e}from"./index-C3ve3BSI.js";import{d as t}from"./styled-DA1wJrz5.js";import{C as s}from"./Card-C_YLnK5j.js";import{B as i}from"./Button-B9x15bIb.js";import{f as r}from"./react-vendor-CVuiIrPN.js";import{u as a}from"./i18n-vendor-BJcBcLSs.js";const o=t.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
