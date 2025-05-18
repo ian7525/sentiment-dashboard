@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/common/Layout";
-import HomePage from "./pages/HomePages";
-import AnalysisPage from "./pages/AnalysisPages";
-import StatsPage from "./pages/StatsPage";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LocaleProvider } from "./contexts/LocaleContext";
 import { ToastProvider } from "./contexts/ToastContext";
 import GlobalStyles from "./styles/GlobalStyles";
 import "./i18n/i18n";
+import { lazyLoadComponent } from "./utils/lazyLoad";
+
+const HomePage = lazyLoadComponent(() => import("./pages/HomePages"));
+const AnalysisPage = lazyLoadComponent(() => import("./pages/AnalysisPages"));
+const StatsPage = lazyLoadComponent(() => import("./pages/StatsPage"));
 
 function App() {
   return (
